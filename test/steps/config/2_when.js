@@ -14,6 +14,7 @@
  *
  */
 import fs from 'fs';
+import { setConfig } from '../../../src/utils/config';
 
 export function theConfigIsLoaded() {
 	// IMPORTANT: This is a workaround because Node’s `require` implementation uses `fs.readFileSync`.
@@ -28,4 +29,17 @@ export function theConfigIsLoaded() {
 
 	// istanbul ignore else
 	if (isSpy) sandbox.stub(fs, 'readFileSync');
+}
+
+export function setConfigIsExecutedWithTheConfigThePathAndTheValue() {
+	const { config, pathName, configValue } = this.test.ctx;
+	try {
+		const returnValue = setConfig(config, pathName, configValue);
+		this.test.ctx.returnValue = returnValue;
+		return returnValue;
+	} catch (error) {
+		const testFunction = setConfig.bind(null, config, pathName, configValue);
+		this.test.ctx.testFunction = testFunction;
+		return testFunction;
+	}
 }

@@ -798,6 +798,224 @@ describe('set command', () => {
 							);
 						});
 					});
+					Given('a variable "liskJS.ssl"', given.aVariable, () => {
+						Given('an unknown value "xxx"', given.anUnknownValue, () => {
+							When(
+								'the action is called with the variable and the value',
+								when.theActionIsCalledWithTheVariableAndTheValue,
+								() => {
+									Then(
+										'it should reject with message "Wrong format for liskJS.ssl - xxx. Expected boolean."',
+										then.itShouldRejectWithMessage,
+									);
+								},
+							);
+						});
+						Given('a value "true"', given.aValue, () => {
+							Given(
+								'the config file cannot be written',
+								given.theConfigFileCannotBeWritten,
+								() => {
+									Given(
+										'Vorpal is in non-interactive mode',
+										given.vorpalIsInNonInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the value',
+												when.theActionIsCalledWithTheVariableAndTheValue,
+												() => {
+													Then(
+														'it should reject with message "Config file could not be written: your changes will not be persisted."',
+														then.itShouldRejectWithMessage,
+													);
+												},
+											);
+										},
+									);
+									Given(
+										'Vorpal is in interactive mode',
+										given.vorpalIsInInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the value',
+												when.theActionIsCalledWithTheVariableAndTheValue,
+												() => {
+													Then(
+														'it should update the config nested variable "liskJS.ssl" to boolean true',
+														then.itShouldUpdateTheConfigNestedVariableToBoolean,
+													);
+													Then(
+														'it should resolve to an object with warning "Config file could not be written: your changes will not be persisted."',
+														then.itShouldResolveToAnObjectWithWarning,
+													);
+													Then(
+														'it should resolve to an object with message "Successfully set liskJS.ssl to true."',
+														then.itShouldResolveToAnObjectWithMessage,
+													);
+												},
+											);
+										},
+									);
+								},
+							);
+							Given(
+								'the config file can be written',
+								given.theConfigFileCanBeWritten,
+								() => {
+									Given(
+										'Vorpal is in non-interactive mode',
+										given.vorpalIsInNonInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the value',
+												when.theActionIsCalledWithTheVariableAndTheValue,
+												() => {
+													Then(
+														'it should update the config nested variable "liskJS.ssl" to boolean true',
+														then.itShouldUpdateTheConfigNestedVariableToBoolean,
+													);
+													Then(
+														'it should write the updated config to the config file',
+														then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+													);
+													Then(
+														'it should resolve to an object with message "Successfully set liskJS.ssl to true."',
+														then.itShouldResolveToAnObjectWithMessage,
+													);
+												},
+											);
+										},
+									);
+									Given(
+										'Vorpal is in interactive mode',
+										given.vorpalIsInInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the value',
+												when.theActionIsCalledWithTheVariableAndTheValue,
+												() => {
+													Then(
+														'it should update the config nested variable "liskJS.ssl" to boolean true',
+														then.itShouldUpdateTheConfigNestedVariableToBoolean,
+													);
+													Then(
+														'it should write the updated config to the config file',
+														then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+													);
+													Then(
+														'it should resolve to an object with message "Successfully set liskJS.ssl to true."',
+														then.itShouldResolveToAnObjectWithMessage,
+													);
+												},
+											);
+										},
+									);
+								},
+							);
+						});
+						Given('a value "false"', given.aValue, () => {
+							Given(
+								'the config file cannot be written',
+								given.theConfigFileCannotBeWritten,
+								() => {
+									Given(
+										'Vorpal is in non-interactive mode',
+										given.vorpalIsInNonInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the value',
+												when.theActionIsCalledWithTheVariableAndTheValue,
+												() => {
+													Then(
+														'it should reject with message "Config file could not be written: your changes will not be persisted."',
+														then.itShouldRejectWithMessage,
+													);
+												},
+											);
+										},
+									);
+									Given(
+										'Vorpal is in interactive mode',
+										given.vorpalIsInInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the value',
+												when.theActionIsCalledWithTheVariableAndTheValue,
+												() => {
+													Then(
+														'it should update the config nested variable "liskJS.ssl" to boolean false',
+														then.itShouldUpdateTheConfigNestedVariableToBoolean,
+													);
+													Then(
+														'it should resolve to an object with warning "Config file could not be written: your changes will not be persisted."',
+														then.itShouldResolveToAnObjectWithWarning,
+													);
+													Then(
+														'it should resolve to an object with message "Successfully set liskJS.ssl to false."',
+														then.itShouldResolveToAnObjectWithMessage,
+													);
+												},
+											);
+										},
+									);
+								},
+							);
+							Given(
+								'the config file can be written',
+								given.theConfigFileCanBeWritten,
+								() => {
+									Given(
+										'Vorpal is in non-interactive mode',
+										given.vorpalIsInNonInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the value',
+												when.theActionIsCalledWithTheVariableAndTheValue,
+												() => {
+													Then(
+														'it should update the config nested variable "liskJS.ssl" to boolean false',
+														then.itShouldUpdateTheConfigNestedVariableToBoolean,
+													);
+													Then(
+														'it should write the updated config to the config file',
+														then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+													);
+													Then(
+														'it should resolve to an object with message "Successfully set liskJS.ssl to false."',
+														then.itShouldResolveToAnObjectWithMessage,
+													);
+												},
+											);
+										},
+									);
+									Given(
+										'Vorpal is in interactive mode',
+										given.vorpalIsInInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the value',
+												when.theActionIsCalledWithTheVariableAndTheValue,
+												() => {
+													Then(
+														'it should update the config nested variable "liskJS.ssl" to boolean false',
+														then.itShouldUpdateTheConfigNestedVariableToBoolean,
+													);
+													Then(
+														'it should write the updated config to the config file',
+														then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+													);
+													Then(
+														'it should resolve to an object with message "Successfully set liskJS.ssl to false."',
+														then.itShouldResolveToAnObjectWithMessage,
+													);
+												},
+											);
+										},
+									);
+								},
+							);
+						});
+					});
 				});
 			});
 		});

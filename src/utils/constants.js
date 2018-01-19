@@ -29,4 +29,12 @@ export const SINGULARS = {
 	transactions: 'transaction',
 };
 
-export const CONFIG_VARIABLES = ['json', 'name', 'pretty', 'testnet'];
+export const CONFIG_VARIABLES = [
+	'json',
+	'name',
+	'pretty',
+	'liskJS.testnet',
+	'liskJS.ssl',
+	'liskJS.node',
+	'liskJS.port',
+];

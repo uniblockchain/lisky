@@ -20,11 +20,13 @@ import { writeJSONSync } from '../utils/fs';
 import { createCommand } from '../utils/helpers';
 import liskAPIInstance from '../utils/api';
 
-const description = `Sets configuration <variable> to <value>. Variables available: json, name, testnet. Configuration is persisted in \`${configFilePath}\`.
+const availableVariables = CONFIG_VARIABLES.join(', ');
+const description = `Sets configuration <variable> to <value>. Variables available: ${availableVariables}. Configuration is persisted in \`${configFilePath}\`.
 
 	Examples:
 	- set json true
 	- set name my_custom_lisky
+	- set liskJS.testnet true
 `;
 
 const WRITE_FAIL_WARNING =
@@ -50,15 +52,16 @@ const setNestedConfigProperty = newValue => (obj, pathComponent, i, path) => {
 	return obj[pathComponent];
 };
 
-const attemptWriteToFile = (variable, value) => {
+const attemptWriteToFile = (variable, value, path) => {
 	const writeSuccess = writeConfigToFile(config);
 
 	if (!writeSuccess && process.env.NON_INTERACTIVE_MODE === 'true') {
 		throw new FileSystemError(WRITE_FAIL_WARNING);
 	}
 
+	const variablePath = path.join('.');
 	const result = {
-		message: `Successfully set ${variable} to ${value}.`,
+		message: `Successfully set ${variablePath} to ${value}.`,
 	};
 
 	if (!writeSuccess) {
@@ -80,19 +83,26 @@ const setBoolean = (variable, path) => value => {
 		liskAPIInstance.setTestnet(newValue);
 	}
 
-	return attemptWriteToFile(variable, value);
+	if (variable === 'ssl') {
+		liskAPIInstance.setSSL(newValue);
+	}
+
+	return attemptWriteToFile(variable, value, path);
 };
 
 const setString = (variable, path) => value => {
 	path.reduce(setNestedConfigProperty(value), config);
-	return attemptWriteToFile(variable, value);
+	return attemptWriteToFile(variable, value, path);
 };
 
 const handlers = {
 	json: setBoolean('json', ['json']),
 	name: setString('name', ['name']),
 	pretty: setBoolean('pretty', ['pretty']),
-	testnet: setBoolean('testnet', ['liskJS', 'testnet']),
+	'liskJS.testnet': setBoolean('testnet', ['liskJS', 'testnet']),
+	'liskJS.ssl': setBoolean('ssl', ['liskJS', 'ssl']),
+	'liskJS.node': setString('node', ['liskJS', 'node']),
+	'liskJS.port': setString('port', ['liskJS', 'port']),
 };
 
 export const actionCreator = () => async ({ variable, value }) => {

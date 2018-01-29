@@ -13,9 +13,9 @@
  * Removal or modification of this copyright notice is prohibited.
  *
  */
-import liskJS from 'lisk-js';
+import api from 'lisk-js';
 import config from './config';
 
-const { api: LiskAPI } = liskJS;
+const { api: LiskAPI } = api;
 
-export default new LiskAPI(config.liskJS);
+export default new LiskAPI(config.api);

@@ -26,7 +26,7 @@ const description = `Sets configuration <variable> to <value>. Variables availab
 	Examples:
 	- set json true
 	- set name my_custom_lisky
-	- set liskJS.testnet true
+	- set api.testnet true
 `;
 
 const WRITE_FAIL_WARNING =
@@ -83,11 +83,11 @@ const setBoolean = dotNotation => value => {
 	const newValue = value === 'true';
 	dotNotationArray.reduce(setNestedConfigProperty(newValue), config);
 
-	if (dotNotation === 'liskJS.testnet') {
+	if (dotNotation === 'api.testnet') {
 		liskAPIInstance.setTestnet(newValue);
 	}
 
-	if (dotNotation === 'liskJS.ssl') {
+	if (dotNotation === 'api.ssl') {
 		liskAPIInstance.setSSL(newValue);
 	}
 
@@ -104,10 +104,10 @@ const handlers = {
 	json: setBoolean('json'),
 	name: setString('name'),
 	pretty: setBoolean('pretty'),
-	'liskJS.testnet': setBoolean('liskJS.testnet'),
-	'liskJS.ssl': setBoolean('liskJS.ssl'),
-	'liskJS.node': setString('liskJS.node'),
-	'liskJS.port': setString('liskJS.port'),
+	'api.testnet': setBoolean('api.testnet'),
+	'api.ssl': setBoolean('api.ssl'),
+	'api.node': setString('api.node'),
+	'api.port': setString('api.port'),
 };
 
 export const actionCreator = () => async ({ variable, value }) => {

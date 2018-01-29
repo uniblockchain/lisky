@@ -40,7 +40,7 @@ const BOOLEANS = {
 	false: false,
 };
 
-const regExpQuotes = /"((.|\n|\s\S)+?)"/;
+const regExpQuotes = /"((.|\n|[^\\s\S])+?)"/;
 const regExpNumbers = /\d+(.\d+)?/;
 const regExpBooleans = /(true|false)/;
 
@@ -58,8 +58,7 @@ export const getNumbers = title => {
 	return title.match(globalRegExp).map(Number);
 };
 
-export const getFirstBoolean = title =>
-	BOOLEANS[title.match(regExpBooleans)[1]];
+export const getFirstBoolean = title => BOOLEANS[title.match(regExpBooleans)[1]];
 
 export const getBooleans = title => {
 	const globalRegExp = new RegExp(regExpBooleans, 'g');
@@ -82,7 +81,8 @@ export const getActionCreator = actionName =>
 		'encrypt passphrase': encryptPassphrase.actionCreator,
 		'create transaction register delegate':
 			createTransactionRegisterDelegate.actionCreator,
-		'create transaction cast votes': createTransactionCastVotes.actionCreator,
+		'create transaction cast votes':
+			createTransactionCastVotes.actionCreator,
 		'create transaction register multisignature account':
 			createTransactionRegisterMultisignatureAccount.actionCreator,
 		'create transaction register second passphrase':
@@ -129,7 +129,9 @@ export function getTransactionCreatorFunctionNameByType(transactionType) {
 			return 'registerMultisignature';
 		// istanbul ignore next
 		default:
-			throw new Error(`Transaction type ${transactionType} is not supported`);
+			throw new Error(
+				`Transaction type ${transactionType} is not supported`,
+			);
 	}
 }
 

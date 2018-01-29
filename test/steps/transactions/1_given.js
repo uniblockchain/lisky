@@ -14,6 +14,7 @@
  *
  */
 import transactions from '../../../src/utils/transactions';
+import { getFirstQuotedString } from '../utils';
 
 export function aSignatureInTableFormat() {
 	this.test.ctx.signature = `
@@ -68,14 +69,19 @@ export function aTransactionsObject() {
 	this.test.ctx.transactionsObject = transactions;
 }
 
+export function anUnsignedTransaction() {
+	const transactionString = getFirstQuotedString(this.test.parent.title);
+	console.log(transactionString);
+	this.test.ctx.transaction = JSON.parse(transactionString);
+}
+
 export function aLiskObjectThatCanCreateTransactions() {
 	const createdTransaction = {
 		type: 0,
 		amount: 123,
 		publicKey: 'oneStubbedPublicKey',
 	};
-
-	[
+[
 		'transfer',
 		'registerSecondPassphrase',
 		'registerDelegate',

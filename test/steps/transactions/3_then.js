@@ -113,6 +113,14 @@ export function itShouldHaveAFunctionForCreatingATypeTransaction() {
 		.and.be.type('function');
 }
 
+export function itShouldCreateARegisterSecondPassphraseTransactionUsingTheSecondPassphrase() {
+	const { secondPassphrase } = this.test.ctx;
+	return transactions.registerSecondPassphrase.should.be.calledWithExactly({
+		passphrase: null,
+		secondPassphrase,
+	});
+}
+
 export function itShouldCreateARegisterSecondPassphraseTransactionUsingThePassphraseAndTheSecondPassphrase() {
 	const { passphrase, secondPassphrase } = this.test.ctx;
 	return transactions.registerSecondPassphrase.should.be.calledWithExactly({
